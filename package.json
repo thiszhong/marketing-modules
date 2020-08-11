@@ -1,0 +1,24 @@
+{
+  "name": "marketing-modules",
+  "version": "1.0.0",
+  "description": "Marketing modules, such as Rotate-plate, Scratchers, Lottery.etc. 营销组件，大转盘、刮刮乐、抽奖等JS",
+  "scripts": {
+    "build": "npm run build-debug && npm run build-min",
+    "build-debug": "webpack",
+    "build-min": "cross-env NODE_ENV=production webpack",
+    "build-watch": "webpack --watch",
+    "test": "karma start --single-run",
+    "prepublish": "npm run build"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.11.1",
+    "@babel/preset-env": "^7.11.0",
+    "babel-loader": "^8.1.0",
+    "cross-env": "^7.0.2",
+    "terser-webpack-plugin": "^4.1.0",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
+  }
+}

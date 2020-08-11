@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marketing modules: rotate-plate</title>
+
+  <style>
+    section {
+      text-align: center;
+      padding: 10px;
+      margin: 17px auto;
+    }
+    .rotate-plate-container {
+      width: 300px;
+      height: 300px;
+      padding: 2px;
+      box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      background: red;
+      border-radius: 50%;
+      position: relative;
+    }
+    .rotate-plate-container::after {
+      content: '';
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 18px 6px;
+      border-color: red transparent transparent transparent;
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      -webkit-transform: translateX(-50%);
+    }
+    .rotate-plate {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      overflow: hidden;
+      position: relative;
+    }
+    .rotate-transition {
+      transition: all 5s;
+    }
+    .rotate-plate-bg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
+    #rotateBlocks {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .rotate-plate-btn {
+      width: 78px;
+      height: 78px;
+      background: #fff;
+      border-radius: 50%;
+      position: absolute;
+      z-index: 9;
+      top: 50%;
+      left: 50%;
+      margin: -39px 0 0 -39px;
+      border: 3px solid red;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 30px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+  </style>
+</head>
+<body>
+  <section>
+    <div class="rotate-plate-container">
+      <div class="rotate-plate">
+        <img class="rotate-plate-bg" src="./img/rotate-plate.jpg" alt="底图">
+        <div id="rotateBlocks"></div>
+      </div>
+      <div id="rotateTrigger" class="rotate-plate-btn">Go</div>
+    </div>
+  </section>
+  
+  <script src="../dist/marketing-modules.js"></script>
+
+  <script>
+    var rp = new MarketingModulesJS.RotatePlate('.rotate-plate', {
+      renderItem: renderRotateItem,
+      count: 10,
+      resetAfterEnd: true
+    });
+    console.log(rp);
+    
+    document.getElementById('rotateTrigger').addEventListener('click', function() {
+      rp.rotate(3)
+    }, false)
+
+    function renderRotateItem(index, maxWidth) {
+      return '<strong>' + index + '</strong>-w' + maxWidth
+    }
+  </script>
+</body>
+</html>
