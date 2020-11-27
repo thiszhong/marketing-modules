@@ -3,7 +3,7 @@ const DEFAULT_COUNT = 8;
 class RotatePlate {
 
   constructor(target, options = {}) {
-    const { count, renderItem, angle, endCallback, resetAfterEnd = false } = options;
+    const { count, renderItem, angle, itemInitAngle, endCallback, resetAfterEnd = false } = options;
     this.count = typeof count === 'number' ? count : DEFAULT_COUNT;
     this.initAngle = angle || 0;
     this.endCallback = endCallback;
@@ -11,6 +11,7 @@ class RotatePlate {
 
     this.resolveTarget(target);
 
+    this.itemInitAngle = itemInitAngle || 0
     if (typeof renderItem === 'function') {
       this.renderItems(renderItem)
     }
@@ -25,8 +26,8 @@ class RotatePlate {
       index = parseInt(Math.random() * this.count)
     }
     this.aimIndex = index;
-    const minDeg = this.itemDeg * index - index / 2 + 3; // 避免压线
-    const maxDeg = this.itemDeg * index + index / 2 - 3;
+    const minDeg = this.itemDeg * index - index / 2 + this.itemInitAngle + 3; // 避免压线
+    const maxDeg = this.itemDeg * index + index / 2 + this.itemInitAngle - 3;
     let deg = (maxDeg - minDeg) * Math.random() + minDeg;
     deg = (360 * 12) - deg; // 圈数
 
@@ -94,7 +95,7 @@ class RotatePlate {
     if (containerPosition === 'static') this.rotatePlateEl.style.position = 'relative';
 
     for (var i = 0; i < this.count; i++) {
-      var theRotate = this.itemDeg * i;
+      var theRotate = this.itemDeg * i + this.itemInitAngle;
       var str = func(i, w);
       if (typeof str !== 'string') {
         throw new TypeError('The "renderItem" function must return a string of html')

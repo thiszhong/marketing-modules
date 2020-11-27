@@ -116,6 +116,7 @@ class RotatePlate {
       count,
       renderItem,
       angle,
+      itemInitAngle,
       endCallback,
       resetAfterEnd = false
     } = options;
@@ -124,6 +125,7 @@ class RotatePlate {
     this.endCallback = endCallback;
     this.resetAfterEnd = resetAfterEnd;
     this.resolveTarget(target);
+    this.itemInitAngle = itemInitAngle || 0;
 
     if (typeof renderItem === 'function') {
       this.renderItems(renderItem);
@@ -141,9 +143,9 @@ class RotatePlate {
     }
 
     this.aimIndex = index;
-    const minDeg = this.itemDeg * index - index / 2 + 3; // 避免压线
+    const minDeg = this.itemDeg * index - index / 2 + this.itemInitAngle + 3; // 避免压线
 
-    const maxDeg = this.itemDeg * index + index / 2 - 3;
+    const maxDeg = this.itemDeg * index + index / 2 + this.itemInitAngle - 3;
     let deg = (maxDeg - minDeg) * Math.random() + minDeg;
     deg = 360 * 12 - deg; // 圈数
 
@@ -217,7 +219,7 @@ class RotatePlate {
     if (containerPosition === 'static') this.rotatePlateEl.style.position = 'relative';
 
     for (var i = 0; i < this.count; i++) {
-      var theRotate = this.itemDeg * i;
+      var theRotate = this.itemDeg * i + this.itemInitAngle;
       var str = func(i, w);
 
       if (typeof str !== 'string') {
