@@ -233,9 +233,9 @@ class RotatePlate {
       itemsWrapper = document.createElement('div');
       itemsWrapper.setAttribute('class', 'rp-items-wrapper');
       this.rotatePlateEl.append(itemsWrapper);
-    }
+    } // console.log(itemsWrapper)
 
-    console.log(itemsWrapper);
+
     itemsWrapper.innerHTML = html;
   } // 事件浏览器前缀
 

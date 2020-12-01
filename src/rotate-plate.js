@@ -111,7 +111,7 @@ class RotatePlate {
       itemsWrapper.setAttribute('class', 'rp-items-wrapper');
       this.rotatePlateEl.append(itemsWrapper);
     }
-    console.log(itemsWrapper)
+    // console.log(itemsWrapper)
     itemsWrapper.innerHTML = html;
   }
 
